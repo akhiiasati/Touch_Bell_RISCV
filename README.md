@@ -70,12 +70,18 @@ int main() {
         //int ctsValue = digitalRead(ctsPin);
         if (ctsPin) {
             ledPin = 1;
+            asm(
+		"andi %0, x30, 1\n\t"
+		:"=r"(ledPin));
             // Use printf to indicate "TOUCHED" without Serial
             //printf("TOUCHED\n");
         } else {
             ledPin=0;
+             asm(
+		"andi %0, x30, 1\n\t"
+		:"=r"(ledPin));
             // Use printf to indicate "not touched" without Serial
-            printf("not touched\n");
+            //printf("not touched\n");
         }
         delay(500); // Delay for 500 milliseconds (0.5 seconds)
     }
