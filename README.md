@@ -43,6 +43,12 @@ When a finger hits the screen a tiny electrical charge is transferred to the fin
 ![Untitled-9](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/874d48ac-b205-44dc-ab7d-dba6a7e8738a)
 
 
+## Block Diagram
+
+![Block](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/0ba9bc5d-8d01-459b-b538-e5d753ef6dc4)
+
+
+
 ## C Code
 
 ```C
