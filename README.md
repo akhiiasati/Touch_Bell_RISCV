@@ -56,7 +56,7 @@ int main() {
     //pinMode(ledPin, OUTPUT);
     //pinMode(ctsPin, INPUT);
     int ctsPin=0;
-    int ledPin=0;
+    int BuzzerPin=0;
     
     asm(
 	"or x30, x30, %0\n\t" 
@@ -64,26 +64,26 @@ int main() {
     
     asm(
 	"andi %0, x30, 1\n\t"
-	:"=r"(ledPin));
+	:"=r"(BuzzerPin));
     
     while (1) {
         //int ctsValue = digitalRead(ctsPin);
         if (ctsPin) {
-            ledPin = 1;
+            BuzzerPin = 1;
             asm(
 		"andi %0, x30, 1\n\t"
-		:"=r"(ledPin));
+		:"=r"(BuzzerPin));
             // Use printf to indicate "TOUCHED" without Serial
             //printf("TOUCHED\n");
         } else {
-            ledPin=0;
+            BuzzerPin=0;
              asm(
 		"andi %0, x30, 1\n\t"
-		:"=r"(ledPin));
+		:"=r"(BuzzerPin));
             // Use printf to indicate "not touched" without Serial
             //printf("not touched\n");
         }
-        delay(500); // Delay for 500 milliseconds (0.5 seconds)
+        //delay(500); // Delay for 500 milliseconds (0.5 seconds)
     }
 
     return 0;
