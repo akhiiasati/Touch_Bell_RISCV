@@ -47,7 +47,17 @@ When a finger hits the screen a tiny electrical charge is transferred to the fin
 
 ![Block](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/0ba9bc5d-8d01-459b-b538-e5d753ef6dc4)
 
+## Testing
 
+We first compile the C code using gcc and check the expected outcomes for testcases.
+
+```bash
+gcc locker.c
+./a.out
+```
+
+![Screenshot from 2023-10-10 22-18-18](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/c55f0b41-3cf5-4ca5-adb0-b84d7cc2d059)
+![Screenshot from 2023-10-10 22-17-44](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/7f3667fe-690e-4482-aaf0-ed3a1d3ba924)
 
 ## C Code
 
@@ -133,8 +143,6 @@ void delaytime(int seconds) {
     }
 }
 ```
-![Screenshot from 2023-10-10 22-18-18](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/c55f0b41-3cf5-4ca5-adb0-b84d7cc2d059)
-![Screenshot from 2023-10-10 22-17-44](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/7f3667fe-690e-4482-aaf0-ed3a1d3ba924)
 
 ## Assembly Code
 ```assembly
