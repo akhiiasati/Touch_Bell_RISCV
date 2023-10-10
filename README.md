@@ -133,6 +133,9 @@ void delaytime(int seconds) {
     }
 }
 ```
+![Screenshot from 2023-10-10 22-18-18](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/c55f0b41-3cf5-4ca5-adb0-b84d7cc2d059)
+![Screenshot from 2023-10-10 22-17-44](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/7f3667fe-690e-4482-aaf0-ed3a1d3ba924)
+
 ## Assembly Code
 ```assembly
 
@@ -233,36 +236,22 @@ Disassembly of section .text:
 ## RISCV Instruction in Assembly Code
 
 ```
-Number of different instructions: 30
+Number of different instructions: 16
 List of unique instructions:
-sw
-sb
-mv
-auipc
-li
-bne
-sll
-bltu
-and
-neg
-lui
-jalr
-sra
-ret
-jal
-blt
-jr
-ecall
 lw
-bltz
-zext.b
-or
-lbu
-add
-beq
-j
-bgeu
 beqz
-bnez
-sub
+lui
+and
+li
+add
+sll
+nop
+blt
+j
+sw
+or
+auipc
+jalr
+ret
+bge
 ```
