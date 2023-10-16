@@ -224,22 +224,21 @@ Disassembly of section .text:
 ## RISCV Instruction in Assembly Code
 
 ```
-Number of different instructions: 16
+Number of different instructions: 15
 List of unique instructions:
-lw
-beqz
 lui
-and
-li
-add
-sll
-nop
 blt
-j
+beqz
+add
 sw
-or
-auipc
-jalr
-ret
+sll
 bge
+or
+and
+jal
+j
+ret
+li
+nop
+lw
 ```
