@@ -147,98 +147,78 @@ void delaytime(int seconds) {
 ## Assembly Code
 ```assembly
 
-out:     file format elf32-littleriscv
-
+akhil1.o:     file format elf32-littleriscv
 
 Disassembly of section .text:
 
-00000000 <main>:
-   0: ff010113                add   sp,sp,-16
-   4: 00112623                sw    ra,12(sp)
-   8: 00812423                sw    s0,8(sp)
-   c: 01010413                add   s0,sp,16
-  10: 000007b7                lui   a5,0x0
-  14: 0007a023                sw    zero,0(a5) # 0 <main>
-  18: 000007b7                lui   a5,0x0
-  1c: 0007a783                lw    a5,0(a5) # 0 <main>
-  20: 00179713                sll   a4,a5,0x1
-  24: 000007b7                lui   a5,0x0
-  28: 00e7a023                sw    a4,0(a5) # 0 <main>
-  2c: 000007b7                lui   a5,0x0
-  30: 0007a783                lw    a5,0(a5) # 0 <main>
-  34: 00ff6f33                or    t5,t5,a5
+00010094 <main>:
+   10094:	ff010113          	add	sp,sp,-16
+   10098:	00112623          	sw	ra,12(sp)
+   1009c:	00812423          	sw	s0,8(sp)
+   100a0:	01010413          	add	s0,sp,16
+   100a4:	000117b7          	lui	a5,0x11
+   100a8:	1807ae23          	sw	zero,412(a5) # 1119c <BuzzerPin>
+   100ac:	000117b7          	lui	a5,0x11
+   100b0:	19c7a783          	lw	a5,412(a5) # 1119c <BuzzerPin>
+   100b4:	00179713          	sll	a4,a5,0x1
+   100b8:	80e1a423          	sw	a4,-2040(gp) # 111a0 <BuzzerPin_reg>
+   100bc:	8081a783          	lw	a5,-2040(gp) # 111a0 <BuzzerPin_reg>
+   100c0:	00ff6f33          	or	t5,t5,a5
+   100c4:	001f7713          	and	a4,t5,1
+   100c8:	000117b7          	lui	a5,0x11
+   100cc:	18e7ac23          	sw	a4,408(a5) # 11198 <__DATA_BEGIN__>
+   100d0:	000117b7          	lui	a5,0x11
+   100d4:	1987a783          	lw	a5,408(a5) # 11198 <__DATA_BEGIN__>
+   100d8:	02078a63          	beqz	a5,1010c <main+0x78>
+   100dc:	000117b7          	lui	a5,0x11
+   100e0:	00100713          	li	a4,1
+   100e4:	18e7ae23          	sw	a4,412(a5) # 1119c <BuzzerPin>
+   100e8:	000117b7          	lui	a5,0x11
+   100ec:	19c7a783          	lw	a5,412(a5) # 1119c <BuzzerPin>
+   100f0:	00179713          	sll	a4,a5,0x1
+   100f4:	80e1a423          	sw	a4,-2040(gp) # 111a0 <BuzzerPin_reg>
+   100f8:	8081a783          	lw	a5,-2040(gp) # 111a0 <BuzzerPin_reg>
+   100fc:	00ff6f33          	or	t5,t5,a5
+   10100:	3e800513          	li	a0,1000
+   10104:	02c000ef          	jal	10130 <delaytime>
+   10108:	fbdff06f          	j	100c4 <main+0x30>
+   1010c:	000117b7          	lui	a5,0x11
+   10110:	1807ae23          	sw	zero,412(a5) # 1119c <BuzzerPin>
+   10114:	000117b7          	lui	a5,0x11
+   10118:	19c7a783          	lw	a5,412(a5) # 1119c <BuzzerPin>
+   1011c:	00179713          	sll	a4,a5,0x1
+   10120:	80e1a423          	sw	a4,-2040(gp) # 111a0 <BuzzerPin_reg>
+   10124:	8081a783          	lw	a5,-2040(gp) # 111a0 <BuzzerPin_reg>
+   10128:	00ff6f33          	or	t5,t5,a5
+   1012c:	f99ff06f          	j	100c4 <main+0x30>
 
-00000038 <.L4>:
-  38: 001f7713                and   a4,t5,1
-  3c: 000007b7                lui   a5,0x0
-  40: 00e7a023                sw    a4,0(a5) # 0 <main>
-  44: 000007b7                lui   a5,0x0
-  48: 0007a783                lw    a5,0(a5) # 0 <main>
-  4c: 04078063                beqz  a5,8c <.L2>
-  50: 000007b7                lui   a5,0x0
-  54: 00100713                li    a4,1
-  58: 00e7a023                sw    a4,0(a5) # 0 <main>
-  5c: 000007b7                lui   a5,0x0
-  60: 0007a783                lw    a5,0(a5) # 0 <main>
-  64: 00179713                sll   a4,a5,0x1
-  68: 000007b7                lui   a5,0x0
-  6c: 00e7a023                sw    a4,0(a5) # 0 <main>
-  70: 000007b7                lui   a5,0x0
-  74: 0007a783                lw    a5,0(a5) # 0 <main>
-  78: 00ff6f33                or    t5,t5,a5
-  7c: 3e800513                li    a0,1000
-  80: 00000097                auipc ra,0x0
-  84: 000080e7                jalr  ra # 80 <.L4+0x48>
-  88: fb1ff06f                j     38 <.L4>
-
-0000008c <.L2>:
-  8c: 000007b7                lui   a5,0x0
-  90: 0007a023                sw    zero,0(a5) # 0 <main>
-  94: 000007b7                lui   a5,0x0
-  98: 0007a783                lw    a5,0(a5) # 0 <main>
-  9c: 00179713                sll   a4,a5,0x1
-  a0: 000007b7                lui   a5,0x0
-  a4: 00e7a023                sw    a4,0(a5) # 0 <main>
-  a8: 000007b7                lui   a5,0x0
-  ac: 0007a783                lw    a5,0(a5) # 0 <main>
-  b0: 00ff6f33                or    t5,t5,a5
-  b4: f85ff06f                j     38 <.L4>
-
-000000b8 <delaytime>:
-  b8: fd010113                add   sp,sp,-48
-  bc: 02812623                sw    s0,44(sp)
-  c0: 03010413                add   s0,sp,48
-  c4: fca42e23                sw    a0,-36(s0)
-  c8: fe042623                sw    zero,-20(s0)
-  cc: 0340006f                j     100 <.L6>
-
-000000d0 <.L9>:
-  d0: fe042423                sw    zero,-24(s0)
-  d4: 0100006f                j     e4 <.L7>
-
-000000d8 <.L8>:
-  d8: fe842783                lw    a5,-24(s0)
-  dc: 00178793                add   a5,a5,1
-  e0: fef42423                sw    a5,-24(s0)
-
-000000e4 <.L7>:
-  e4: fe842703                lw    a4,-24(s0)
-  e8: 000f47b7                lui   a5,0xf4
-  ec: 23f78793                add   a5,a5,575 # f423f <.L6+0xf413f>
-  f0: fee7d4e3                bge   a5,a4,d8 <.L8>
-  f4: fec42783                lw    a5,-20(s0)
-  f8: 00178793                add   a5,a5,1
-  fc: fef42623                sw    a5,-20(s0)
-
-00000100 <.L6>:
- 100: fec42703                lw    a4,-20(s0)
- 104: fdc42783                lw    a5,-36(s0)
- 108: fcf744e3                blt   a4,a5,d0 <.L9>
- 10c: 00000013                nop
- 110: 00000013                nop
- 114: 02c12403                lw    s0,44(sp)
- 118: 03010113                add   sp,sp,48
- 11c: 00008067                ret
+00010130 <delaytime>:
+   10130:	fd010113          	add	sp,sp,-48
+   10134:	02812623          	sw	s0,44(sp)
+   10138:	03010413          	add	s0,sp,48
+   1013c:	fca42e23          	sw	a0,-36(s0)
+   10140:	fe042623          	sw	zero,-20(s0)
+   10144:	0340006f          	j	10178 <delaytime+0x48>
+   10148:	fe042423          	sw	zero,-24(s0)
+   1014c:	0100006f          	j	1015c <delaytime+0x2c>
+   10150:	fe842783          	lw	a5,-24(s0)
+   10154:	00178793          	add	a5,a5,1
+   10158:	fef42423          	sw	a5,-24(s0)
+   1015c:	fe842703          	lw	a4,-24(s0)
+   10160:	000f47b7          	lui	a5,0xf4
+   10164:	23f78793          	add	a5,a5,575 # f423f <__global_pointer$+0xe28a7>
+   10168:	fee7d4e3          	bge	a5,a4,10150 <delaytime+0x20>
+   1016c:	fec42783          	lw	a5,-20(s0)
+   10170:	00178793          	add	a5,a5,1
+   10174:	fef42623          	sw	a5,-20(s0)
+   10178:	fec42703          	lw	a4,-20(s0)
+   1017c:	fdc42783          	lw	a5,-36(s0)
+   10180:	fcf744e3          	blt	a4,a5,10148 <delaytime+0x18>
+   10184:	00000013          	nop
+   10188:	00000013          	nop
+   1018c:	02c12403          	lw	s0,44(sp)
+   10190:	03010113          	add	sp,sp,48
+   10194:	00008067          	ret
 ```
 
 ## RISCV Instruction in Assembly Code
