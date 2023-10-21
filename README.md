@@ -62,14 +62,14 @@ gcc locker.c
 ## C Code
 
 ```C
-int TouchSensor;
-int BuzzerPin;
-int BuzzerPin_reg;
-
 void initialize();
 void delaytime(int);
 int main()
 {
+
+int TouchSensor;
+int BuzzerPin;
+int BuzzerPin_reg;
 
 BuzzerPin =0;
 BuzzerPin_reg = BuzzerPin*2;
@@ -147,78 +147,70 @@ void delaytime(int seconds) {
 ## Assembly Code
 ```assembly
 
-akhil1.o:     file format elf32-littleriscv
+out:     file format elf32-littleriscv
+
 
 Disassembly of section .text:
 
-00010094 <main>:
-   10094:	ff010113          	add	sp,sp,-16
-   10098:	00112623          	sw	ra,12(sp)
-   1009c:	00812423          	sw	s0,8(sp)
-   100a0:	01010413          	add	s0,sp,16
-   100a4:	000117b7          	lui	a5,0x11
-   100a8:	1807ae23          	sw	zero,412(a5) # 1119c <BuzzerPin>
-   100ac:	000117b7          	lui	a5,0x11
-   100b0:	19c7a783          	lw	a5,412(a5) # 1119c <BuzzerPin>
-   100b4:	00179713          	sll	a4,a5,0x1
-   100b8:	80e1a423          	sw	a4,-2040(gp) # 111a0 <BuzzerPin_reg>
-   100bc:	8081a783          	lw	a5,-2040(gp) # 111a0 <BuzzerPin_reg>
-   100c0:	00ff6f33          	or	t5,t5,a5
-   100c4:	001f7713          	and	a4,t5,1
-   100c8:	000117b7          	lui	a5,0x11
-   100cc:	18e7ac23          	sw	a4,408(a5) # 11198 <__DATA_BEGIN__>
-   100d0:	000117b7          	lui	a5,0x11
-   100d4:	1987a783          	lw	a5,408(a5) # 11198 <__DATA_BEGIN__>
-   100d8:	02078a63          	beqz	a5,1010c <main+0x78>
-   100dc:	000117b7          	lui	a5,0x11
-   100e0:	00100713          	li	a4,1
-   100e4:	18e7ae23          	sw	a4,412(a5) # 1119c <BuzzerPin>
-   100e8:	000117b7          	lui	a5,0x11
-   100ec:	19c7a783          	lw	a5,412(a5) # 1119c <BuzzerPin>
-   100f0:	00179713          	sll	a4,a5,0x1
-   100f4:	80e1a423          	sw	a4,-2040(gp) # 111a0 <BuzzerPin_reg>
-   100f8:	8081a783          	lw	a5,-2040(gp) # 111a0 <BuzzerPin_reg>
-   100fc:	00ff6f33          	or	t5,t5,a5
-   10100:	3e800513          	li	a0,1000
-   10104:	02c000ef          	jal	10130 <delaytime>
-   10108:	fbdff06f          	j	100c4 <main+0x30>
-   1010c:	000117b7          	lui	a5,0x11
-   10110:	1807ae23          	sw	zero,412(a5) # 1119c <BuzzerPin>
-   10114:	000117b7          	lui	a5,0x11
-   10118:	19c7a783          	lw	a5,412(a5) # 1119c <BuzzerPin>
-   1011c:	00179713          	sll	a4,a5,0x1
-   10120:	80e1a423          	sw	a4,-2040(gp) # 111a0 <BuzzerPin_reg>
-   10124:	8081a783          	lw	a5,-2040(gp) # 111a0 <BuzzerPin_reg>
-   10128:	00ff6f33          	or	t5,t5,a5
-   1012c:	f99ff06f          	j	100c4 <main+0x30>
+00010054 <main>:
+   10054:	fe010113          	addi	sp,sp,-32
+   10058:	00112e23          	sw	ra,28(sp)
+   1005c:	00812c23          	sw	s0,24(sp)
+   10060:	02010413          	addi	s0,sp,32
+   10064:	fe042623          	sw	zero,-20(s0)
+   10068:	fec42783          	lw	a5,-20(s0)
+   1006c:	00179793          	slli	a5,a5,0x1
+   10070:	fef42423          	sw	a5,-24(s0)
+   10074:	fe842783          	lw	a5,-24(s0)
+   10078:	00ff6f33          	or	t5,t5,a5
+   1007c:	001f7793          	andi	a5,t5,1
+   10080:	fef42223          	sw	a5,-28(s0)
+   10084:	fe442783          	lw	a5,-28(s0)
+   10088:	02078663          	beqz	a5,100b4 <main+0x60>
+   1008c:	00100793          	li	a5,1
+   10090:	fef42623          	sw	a5,-20(s0)
+   10094:	fec42783          	lw	a5,-20(s0)
+   10098:	00179793          	slli	a5,a5,0x1
+   1009c:	fef42423          	sw	a5,-24(s0)
+   100a0:	fe842783          	lw	a5,-24(s0)
+   100a4:	00ff6f33          	or	t5,t5,a5
+   100a8:	3e800513          	li	a0,1000
+   100ac:	024000ef          	jal	ra,100d0 <delaytime>
+   100b0:	fcdff06f          	j	1007c <main+0x28>
+   100b4:	fe042623          	sw	zero,-20(s0)
+   100b8:	fec42783          	lw	a5,-20(s0)
+   100bc:	00179793          	slli	a5,a5,0x1
+   100c0:	fef42423          	sw	a5,-24(s0)
+   100c4:	fe842783          	lw	a5,-24(s0)
+   100c8:	00ff6f33          	or	t5,t5,a5
+   100cc:	fb1ff06f          	j	1007c <main+0x28>
 
-00010130 <delaytime>:
-   10130:	fd010113          	add	sp,sp,-48
-   10134:	02812623          	sw	s0,44(sp)
-   10138:	03010413          	add	s0,sp,48
-   1013c:	fca42e23          	sw	a0,-36(s0)
-   10140:	fe042623          	sw	zero,-20(s0)
-   10144:	0340006f          	j	10178 <delaytime+0x48>
-   10148:	fe042423          	sw	zero,-24(s0)
-   1014c:	0100006f          	j	1015c <delaytime+0x2c>
-   10150:	fe842783          	lw	a5,-24(s0)
-   10154:	00178793          	add	a5,a5,1
-   10158:	fef42423          	sw	a5,-24(s0)
-   1015c:	fe842703          	lw	a4,-24(s0)
-   10160:	000f47b7          	lui	a5,0xf4
-   10164:	23f78793          	add	a5,a5,575 # f423f <__global_pointer$+0xe28a7>
-   10168:	fee7d4e3          	bge	a5,a4,10150 <delaytime+0x20>
-   1016c:	fec42783          	lw	a5,-20(s0)
-   10170:	00178793          	add	a5,a5,1
-   10174:	fef42623          	sw	a5,-20(s0)
-   10178:	fec42703          	lw	a4,-20(s0)
-   1017c:	fdc42783          	lw	a5,-36(s0)
-   10180:	fcf744e3          	blt	a4,a5,10148 <delaytime+0x18>
-   10184:	00000013          	nop
-   10188:	00000013          	nop
-   1018c:	02c12403          	lw	s0,44(sp)
-   10190:	03010113          	add	sp,sp,48
-   10194:	00008067          	ret
+000100d0 <delaytime>:
+   100d0:	fd010113          	addi	sp,sp,-48
+   100d4:	02812623          	sw	s0,44(sp)
+   100d8:	03010413          	addi	s0,sp,48
+   100dc:	fca42e23          	sw	a0,-36(s0)
+   100e0:	fe042623          	sw	zero,-20(s0)
+   100e4:	0340006f          	j	10118 <delaytime+0x48>
+   100e8:	fe042423          	sw	zero,-24(s0)
+   100ec:	0100006f          	j	100fc <delaytime+0x2c>
+   100f0:	fe842783          	lw	a5,-24(s0)
+   100f4:	00178793          	addi	a5,a5,1
+   100f8:	fef42423          	sw	a5,-24(s0)
+   100fc:	fe842703          	lw	a4,-24(s0)
+   10100:	000f47b7          	lui	a5,0xf4
+   10104:	23f78793          	addi	a5,a5,575 # f423f <__global_pointer$+0xe290b>
+   10108:	fee7d4e3          	bge	a5,a4,100f0 <delaytime+0x20>
+   1010c:	fec42783          	lw	a5,-20(s0)
+   10110:	00178793          	addi	a5,a5,1
+   10114:	fef42623          	sw	a5,-20(s0)
+   10118:	fec42703          	lw	a4,-20(s0)
+   1011c:	fdc42783          	lw	a5,-36(s0)
+   10120:	fcf744e3          	blt	a4,a5,100e8 <delaytime+0x18>
+   10124:	00000013          	nop
+   10128:	02c12403          	lw	s0,44(sp)
+   1012c:	03010113          	addi	sp,sp,48
+   10130:	00008067          	ret
 ```
 
 ## RISCV Instruction in Assembly Code
@@ -226,19 +218,19 @@ Disassembly of section .text:
 ```
 Number of different instructions: 15
 List of unique instructions:
-lui
-blt
-beqz
-add
-sw
-sll
-bge
-or
-and
-jal
-j
-ret
 li
-nop
+bge
+blt
+slli
+sw
+addi
 lw
+or
+nop
+jal
+ret
+beqz
+j
+lui
+andi
 ```
