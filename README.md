@@ -310,6 +310,12 @@ return 0;
 }
 
 ```
+## The simulation commands and outputs are as follows:
+
+```bash
+riscv64-unknown-elf-gcc -march=rv64i -mabi=lp64 -ffreestanding -o out file.c
+spike pk out
+```
 
 ## Spike Output:
 
