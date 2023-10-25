@@ -310,3 +310,9 @@ return 0;
 }
 
 ```
+
+## Spike Output:
+
+![Screenshot from 2023-10-25 15-30-35](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/fc6caa21-cd7f-4b02-8634-2a5a4402cd9e)
+
+
