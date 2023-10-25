@@ -62,86 +62,139 @@ gcc locker.c
 ## C Code
 
 ```C
-void initialize();
-void delaytime(int);
+//#include<stdio.h>
+
 int main()
 {
-
-int TouchSensor;
-int BuzzerPin;
-int BuzzerPin_reg;
-
-BuzzerPin =0;
-BuzzerPin_reg = BuzzerPin*2;
+int i,j;
+int touchsensor_value,Result1,mask;
+int touchsensor,buzzer;
 
 
+// touchsensor_value =0;
+// touchsensor = touchsensor_value*2;
+
+//asm code to initialize the doorbell buzzer keep it 0 make it closed initialy
+/*
 asm volatile(
 	"or x30, x30, %0\n\t" 
 	:
-	:"r"(BuzzerPin_reg)
+	:"r"(touchsensor)
 	:"x30"
 	);
+*/
 
 
+//for (int j=0; j<15;j++) 
 
-while (1) {
+while (1)
+{
 
+/*if(j%3==1)
+			touchsensor_value = 1;
+	else
+			touchsensor_value =0;
+			
 
+*/
+			
 //  asm code to read sensor value
-asm volatile(
-	"andi %0, x30, 1\n\t"
-	:"=r"(TouchSensor)
-	:
-	:
-	);
+
+	asm volatile(
+		"or x30, x30, %1\n\t"
+		"andi %0, x30, 0x01\n\t"
+		: "=r" (touchsensor)                             // input
+		: "r" (touchsensor_value)                        // storing input
+		: "x30"
+		);
 
 
 
-
-if (TouchSensor)
+//if condition logic
+if (touchsensor_value)
 	{
-	BuzzerPin=1;
-	BuzzerPin_reg = BuzzerPin*2;
+	mask=0xFFFFFFFD;
+	
+	// printf(" \n");
+	
+	buzzer=1;
+	// touchsensor = touchsensor_value*2;
 	
 	//asm code to set output reg
+	/*
 	asm volatile(
 	"or x30, x30, %0\n\t" 
 	:
-	:"r"(BuzzerPin_reg)
+	:"r"(touchsensor)
 	:"x30"
 	);
+	*/
+	
+	asm volatile(
+            "and x30,x30, %0\n\t"     
+            "ori x30, x30,2"               
+            :
+            :"r"(mask)
+            :"x30"
+            );
+            
+            asm volatile(
+	    	"addi %0, x30, 0\n\t"
+	    	:"=r"(Result1)
+	    	:
+	    	:"x30"
+	    	);
+    	//printf("Result1 = %d\n",Result1);
+    	
+	/*
+	for (i = 0; i < 3000; i++) {
+        	for (j = 0; j < 1000000; j++) {
+            	// Adding a loop inside to approximate seconds
+        	}
+    	    }
+	*/
 
-
-	delaytime(1000);
 	}
 else
 	{
-	BuzzerPin=0;
-	BuzzerPin_reg = BuzzerPin*2;
 	
+	mask=0xFFFFFFFD;
+	
+	buzzer=0;
+	// touchsensor = touchsensor_value*2;
+	
+	/*
 	//asm code to set output reg	
 	asm volatile(
 	"or x30, x30, %0\n\t" 
 	:
-	:"r"(BuzzerPin_reg)
+	:"r"(touchsensor)
 	:"x30"
 	);
+	*/
+	
+	asm volatile( 
+            "and x30,x30, %0\n\t"     
+            "ori x30, x30,0"            
+            :
+            :"r"(mask)
+            :"x30"
+        );
+        asm volatile(
+	    	"addi %0, x30, 0\n\t"
+	    	:"=r"(Result1)
+	    	:
+	    	:"x30"
+	    	);
+	 //printf("Result1 = %d\n",Result1);
 
 	}
-
+	//printf("buzzer=%d \n", touchsensor_value); 
 }
-delaytime(500);
+
 return 0;
 }
 
-void delaytime(int seconds) {
-    int i, j;
-    for (i = 0; i < seconds; i++) {
-        for (j = 0; j < 1000000; j++) {
-            //loop for delay
-        }
-    }
-}
 ```
 
 ## Assembly Code
@@ -149,88 +202,55 @@ void delaytime(int seconds) {
 
 out:     file format elf32-littleriscv
 
-
 Disassembly of section .text:
 
 00010054 <main>:
-   10054:	fe010113          	addi	sp,sp,-32
-   10058:	00112e23          	sw	ra,28(sp)
-   1005c:	00812c23          	sw	s0,24(sp)
-   10060:	02010413          	addi	s0,sp,32
-   10064:	fe042623          	sw	zero,-20(s0)
-   10068:	fec42783          	lw	a5,-20(s0)
-   1006c:	00179793          	slli	a5,a5,0x1
-   10070:	fef42423          	sw	a5,-24(s0)
-   10074:	fe842783          	lw	a5,-24(s0)
-   10078:	00ff6f33          	or	t5,t5,a5
-   1007c:	001f7793          	andi	a5,t5,1
+   10054:	fd010113          	addi	sp,sp,-48
+   10058:	02812623          	sw	s0,44(sp)
+   1005c:	03010413          	addi	s0,sp,48
+   10060:	fec42783          	lw	a5,-20(s0)
+   10064:	00ff6f33          	or	t5,t5,a5
+   10068:	001f7793          	andi	a5,t5,1
+   1006c:	fef42423          	sw	a5,-24(s0)
+   10070:	fec42703          	lw	a4,-20(s0)
+   10074:	00100793          	li	a5,1
+   10078:	02f71663          	bne	a4,a5,100a4 <main+0x50>
+   1007c:	ffd00793          	li	a5,-3
    10080:	fef42223          	sw	a5,-28(s0)
-   10084:	fe442783          	lw	a5,-28(s0)
-   10088:	02078663          	beqz	a5,100b4 <main+0x60>
-   1008c:	00100793          	li	a5,1
-   10090:	fef42623          	sw	a5,-20(s0)
-   10094:	fec42783          	lw	a5,-20(s0)
-   10098:	00179793          	slli	a5,a5,0x1
-   1009c:	fef42423          	sw	a5,-24(s0)
-   100a0:	fe842783          	lw	a5,-24(s0)
-   100a4:	00ff6f33          	or	t5,t5,a5
-   100a8:	3e800513          	li	a0,1000
-   100ac:	024000ef          	jal	ra,100d0 <delaytime>
-   100b0:	fcdff06f          	j	1007c <main+0x28>
-   100b4:	fe042623          	sw	zero,-20(s0)
-   100b8:	fec42783          	lw	a5,-20(s0)
-   100bc:	00179793          	slli	a5,a5,0x1
-   100c0:	fef42423          	sw	a5,-24(s0)
-   100c4:	fe842783          	lw	a5,-24(s0)
-   100c8:	00ff6f33          	or	t5,t5,a5
-   100cc:	fb1ff06f          	j	1007c <main+0x28>
-
-000100d0 <delaytime>:
-   100d0:	fd010113          	addi	sp,sp,-48
-   100d4:	02812623          	sw	s0,44(sp)
-   100d8:	03010413          	addi	s0,sp,48
-   100dc:	fca42e23          	sw	a0,-36(s0)
-   100e0:	fe042623          	sw	zero,-20(s0)
-   100e4:	0340006f          	j	10118 <delaytime+0x48>
-   100e8:	fe042423          	sw	zero,-24(s0)
-   100ec:	0100006f          	j	100fc <delaytime+0x2c>
-   100f0:	fe842783          	lw	a5,-24(s0)
-   100f4:	00178793          	addi	a5,a5,1
-   100f8:	fef42423          	sw	a5,-24(s0)
-   100fc:	fe842703          	lw	a4,-24(s0)
-   10100:	000f47b7          	lui	a5,0xf4
-   10104:	23f78793          	addi	a5,a5,575 # f423f <__global_pointer$+0xe290b>
-   10108:	fee7d4e3          	bge	a5,a4,100f0 <delaytime+0x20>
-   1010c:	fec42783          	lw	a5,-20(s0)
-   10110:	00178793          	addi	a5,a5,1
-   10114:	fef42623          	sw	a5,-20(s0)
-   10118:	fec42703          	lw	a4,-20(s0)
-   1011c:	fdc42783          	lw	a5,-36(s0)
-   10120:	fcf744e3          	blt	a4,a5,100e8 <delaytime+0x18>
-   10124:	00000013          	nop
-   10128:	02c12403          	lw	s0,44(sp)
-   1012c:	03010113          	addi	sp,sp,48
-   10130:	00008067          	ret
+   10084:	00100793          	li	a5,1
+   10088:	fef42023          	sw	a5,-32(s0)
+   1008c:	fe442783          	lw	a5,-28(s0)
+   10090:	00ff7f33          	and	t5,t5,a5
+   10094:	002f6f13          	ori	t5,t5,2
+   10098:	000f0793          	mv	a5,t5
+   1009c:	fcf42e23          	sw	a5,-36(s0)
+   100a0:	fc1ff06f          	j	10060 <main+0xc>
+   100a4:	ffd00793          	li	a5,-3
+   100a8:	fef42223          	sw	a5,-28(s0)
+   100ac:	fe042023          	sw	zero,-32(s0)
+   100b0:	fe442783          	lw	a5,-28(s0)
+   100b4:	00ff7f33          	and	t5,t5,a5
+   100b8:	000f6f13          	ori	t5,t5,0
+   100bc:	000f0793          	mv	a5,t5
+   100c0:	fcf42e23          	sw	a5,-36(s0)
+   100c4:	f9dff06f          	j	10060 <main+0xc>
 ```
 
 ## RISCV Instruction in Assembly Code
 
 ```
-Number of different instructions: 15
+Number of different instructions: 11
 List of unique instructions:
-li
-bge
-blt
-slli
 sw
-addi
-lw
-or
-nop
-jal
-ret
-beqz
 j
-lui
+beqz
+or
+and
+ori
+addi
+mv
+lw
 andi
+li
 ```
+
