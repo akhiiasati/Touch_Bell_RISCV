@@ -194,16 +194,16 @@ Disassembly of section .text:
 ```
 Number of different instructions: 10
 List of unique instructions:
-li
-ori
-lw
-sw
 j
-mv
-beqz
-and
 andi
 addi
+sw
+beqz
+ori
+and
+lw
+mv
+li
 ```
 ## Spike Code:
 
@@ -311,3 +311,8 @@ spike pk out
 ![Screenshot from 2023-10-25 15-30-35](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/fc6caa21-cd7f-4b02-8634-2a5a4402cd9e)
 
 
+## Functional Simulation:
+
+![Screenshot from 2023-10-28 21-21-57](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/ccc73c28-fb7d-4b5f-a710-358395601a54)
+
+![Screenshot from 2023-10-28 21-20-01](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/a6ed6763-bfe4-471c-b353-0e17c25e119d)
