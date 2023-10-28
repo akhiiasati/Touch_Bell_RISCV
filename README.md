@@ -208,7 +208,7 @@ li
 ## Spike Code:
 
 ```C
-//#include<stdio.h>
+#include<stdio.h>
 
 int main()
 {
@@ -218,16 +218,16 @@ int touchsensor,buzzer;
 
 
 
-//for (int j=0; j<15;j++) 
+for (int j=0; j<15;j++) 
 
-while (1)
+//while (1)
 {
 
-/*if(j%3==1)
+if(j%3==1)
 			touchsensor_value = 1;
 	else
 			touchsensor_value =0;
-*/			
+			
 
 
 			
@@ -264,7 +264,7 @@ if (touchsensor_value)
 	    	:
 	    	:"x30"
 	    	);
-    	//printf("Result1 = %d\n",Result1);
+    	printf("Result1 = %d\n",Result1);
     	
 	
 
@@ -290,10 +290,10 @@ else
 	    	:
 	    	:"x30"
 	    	);
-	 //printf("Result1 = %d\n",Result1);
+	 printf("Result1 = %d\n",Result1);
 
 	}
-	//printf("buzzer=%d \n", touchsensor_value); 
+	printf("buzzer=%d \n", touchsensor_value); 
 }
 
 return 0;
