@@ -105,11 +105,10 @@ if (touchsensor_value)
 	
 	buzzer=1;
 	
-	asm volatile(
-            "and x30,x30, %0\n\t"     
+	asm volatile(    
             "ori x30, x30,2"               
             :
-            :"r"(mask)
+            :
             :"x30"
             );
             
@@ -153,7 +152,6 @@ else
 
 return 0;
 }
-
 ```
 
 ## Assembly Code
@@ -171,26 +169,24 @@ Disassembly of section .text:
    10060:	001f7793          	andi	a5,t5,1
    10064:	fef42623          	sw	a5,-20(s0)
    10068:	fec42783          	lw	a5,-20(s0)
-   1006c:	02078663          	beqz	a5,10098 <main+0x44>
+   1006c:	02078263          	beqz	a5,10090 <main+0x3c>
    10070:	ffd00793          	li	a5,-3
    10074:	fef42423          	sw	a5,-24(s0)
    10078:	00100793          	li	a5,1
    1007c:	fef42223          	sw	a5,-28(s0)
-   10080:	fe842783          	lw	a5,-24(s0)
-   10084:	00ff7f33          	and	t5,t5,a5
-   10088:	002f6f13          	ori	t5,t5,2
-   1008c:	000f0793          	mv	a5,t5
-   10090:	fef42023          	sw	a5,-32(s0)
-   10094:	fcdff06f          	j	10060 <main+0xc>
-   10098:	ffd00793          	li	a5,-3
-   1009c:	fef42423          	sw	a5,-24(s0)
-   100a0:	fe042223          	sw	zero,-28(s0)
-   100a4:	fe842783          	lw	a5,-24(s0)
-   100a8:	00ff7f33          	and	t5,t5,a5
-   100ac:	000f6f13          	ori	t5,t5,0
-   100b0:	000f0793          	mv	a5,t5
-   100b4:	fef42023          	sw	a5,-32(s0)
-   100b8:	fa9ff06f          	j	10060 <main+0xc>
+   10080:	002f6f13          	ori	t5,t5,2
+   10084:	000f0793          	mv	a5,t5
+   10088:	fef42023          	sw	a5,-32(s0)
+   1008c:	fd5ff06f          	j	10060 <main+0xc>
+   10090:	ffd00793          	li	a5,-3
+   10094:	fef42423          	sw	a5,-24(s0)
+   10098:	fe042223          	sw	zero,-28(s0)
+   1009c:	fe842783          	lw	a5,-24(s0)
+   100a0:	00ff7f33          	and	t5,t5,a5
+   100a4:	000f6f13          	ori	t5,t5,0
+   100a8:	000f0793          	mv	a5,t5
+   100ac:	fef42023          	sw	a5,-32(s0)
+   100b0:	fb1ff06f          	j	10060 <main+0xc>
 ```
 
 ## RISCV Instruction in Assembly Code
@@ -212,7 +208,7 @@ addi
 ## Spike Code:
 
 ```C
-#include<stdio.h>
+//#include<stdio.h>
 
 int main()
 {
@@ -222,27 +218,26 @@ int touchsensor,buzzer;
 
 
 
-for (int j=0; j<15;j++) 
+//for (int j=0; j<15;j++) 
 
-//while (1)
+while (1)
 {
 
-if(j%3==1)
+/*if(j%3==1)
 			touchsensor_value = 1;
 	else
 			touchsensor_value =0;
-			
+*/			
 
 
 			
 //  asm code to read sensor value
 
 	asm volatile(
-		"or x30, x30, %1\n\t"
 		"andi %0, x30, 0x01\n\t"
-		: "=r" (touchsensor)                             // input
-		: "r" (touchsensor_value)                        // storing input
-		: "x30"
+		: "=r" (touchsensor_value)
+		:
+		: 
 		);
 
 
@@ -256,11 +251,10 @@ if (touchsensor_value)
 	
 	buzzer=1;
 	
-	asm volatile(
-            "and x30,x30, %0\n\t"     
+	asm volatile(    
             "ori x30, x30,2"               
             :
-            :"r"(mask)
+            :
             :"x30"
             );
             
@@ -270,7 +264,7 @@ if (touchsensor_value)
 	    	:
 	    	:"x30"
 	    	);
-    	printf("Result1 = %d\n",Result1);
+    	//printf("Result1 = %d\n",Result1);
     	
 	
 
@@ -296,15 +290,14 @@ else
 	    	:
 	    	:"x30"
 	    	);
-	 printf("Result1 = %d\n",Result1);
+	 //printf("Result1 = %d\n",Result1);
 
 	}
-	printf("buzzer=%d \n", touchsensor_value); 
+	//printf("buzzer=%d \n", touchsensor_value); 
 }
 
 return 0;
 }
-
 ```
 ## The simulation commands and outputs are as follows:
 
