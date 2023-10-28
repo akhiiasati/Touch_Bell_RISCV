@@ -88,11 +88,9 @@ while (1)
 //  asm code to read sensor value
 
 	asm volatile(
-		"or x30, x30, %1\n\t"
 		"andi %0, x30, 0x01\n\t"
-		: "=r" (touchsensor)                             // input
 		: "r" (touchsensor_value)                        // storing input
-		: "x30"
+		: 
 		);
 
 
