@@ -89,7 +89,8 @@ while (1)
 
 	asm volatile(
 		"andi %0, x30, 0x01\n\t"
-		: "r" (touchsensor_value)                        // storing input
+		: "=r" (touchsensor_value)
+		:
 		: 
 		);
 
