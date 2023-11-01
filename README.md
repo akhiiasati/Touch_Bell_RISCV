@@ -316,3 +316,5 @@ spike pk out
 ![Screenshot from 2023-10-28 21-21-57](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/ccc73c28-fb7d-4b5f-a710-358395601a54)
 
 ![Screenshot from 2023-10-28 21-20-01](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/a6ed6763-bfe4-471c-b353-0e17c25e119d)
+![Screenshot from 2023-10-31 16-30-42](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/2450bc3d-e889-4e23-aaa9-af93bbab9fd8)
+
