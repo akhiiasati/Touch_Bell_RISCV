@@ -369,7 +369,7 @@ This command writes the gate-level Verilog netlist to a specified file.
 7. Gate-Level Simulation:
 
 ```bash
-iverilog -o test testbench.v synth_processor_test.v sky130_sram_1kbyte_1rw1r_32x256_8.v sky130_fd_sc_hd.v primitives.v
+iverilog -o test testbench.v glstest.v sky130_sram_1kbyte_1rw1r_32x256_8.v sky130_fd_sc_hd.v primitives.v
 ```
 
 This command compiles the Verilog testbench and design files along with the necessary libraries and primitive modules.
