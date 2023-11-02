@@ -318,3 +318,66 @@ spike pk out
 ![Screenshot from 2023-10-28 21-20-01](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/a6ed6763-bfe4-471c-b353-0e17c25e119d)
 ![Screenshot from 2023-10-31 16-30-42](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/2450bc3d-e889-4e23-aaa9-af93bbab9fd8)
 
+## Gate Level Simulation:
+
+The gate-level synthesis (GLS) process involves converting a behavioral or RTL (Register Transfer Level) description of a digital design into a gate-level netlist using a library of standard cells. This netlist represents the design using specific gates such as AND, OR, NOT, and flip-flops, as defined by the technology library being used.
+
+Here are the steps involved in the gate-level synthesis process and the subsequent gate-level simulation using GTKWave:
+
+1. Reading the Library:
+
+```bash
+read_liberty -lib sky130_fd_sc_hd__tt_025C_1v80_256.lib
+```
+
+This command reads the technology library that includes the information about the standard cells available in the target technology.
+
+2. Reading the Verilog Files:
+```bash
+read_verilog processor.v
+```
+This command reads the Verilog files that describe the processor's design.
+
+3. Synthesis:
+```bash
+synth -top wrapper
+```
+This command initiates the synthesis process, generating a gate-level netlist based on the specified top-level module.
+
+4. Mapping Flip-Flops:
+
+```bash
+dfflibmap -liberty sky130_fd_sc_hd__tt_025C_1v80_256.lib
+```
+This command maps the flip-flops in the design to specific D flip-flops from the technology library.
+
+5. ABC (Advanced Boolean Calculator) Synthesis:
+
+```bash
+abc -liberty sky130_fd_sc_hd__tt_025C_1v80_256.lib
+```
+
+This command performs technology mapping and optimization of the synthesized netlist.
+
+6. Writing the Gate-Level Verilog Netlist:
+
+```bash
+write_verilog <filename.v>
+```
+This command writes the gate-level Verilog netlist to a specified file.
+
+7. Gate-Level Simulation:
+
+```bash
+iverilog -o test testbench.v synth_processor_test.v sky130_sram_1kbyte_1rw1r_32x256_8.v sky130_fd_sc_hd.v primitives.v
+```
+
+This command compiles the Verilog testbench and design files along with the necessary libraries and primitive modules.
+
+8. Viewing Waveforms:
+
+The resulting simulation is then visualized using GTKWave, which allows you to view the waveforms of signals in the design to verify the functionality of the synthesized netlist.
+
+![Screenshot from 2023-11-02 21-59-37](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/ab5848b5-a446-4953-bfba-b71b52c2c983)
+![Screenshot from 2023-11-02 22-00-07](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/b2dfdbcc-982b-4e8f-9f52-82739a3657c6)
+
