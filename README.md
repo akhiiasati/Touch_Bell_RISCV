@@ -375,6 +375,6 @@ This command compiles the Verilog testbench and design files along with the nece
 
 The resulting simulation is then visualized using GTKWave, which allows you to view the waveforms of signals in the design to verify the functionality of the synthesized netlist.
 
-![Screenshot from 2023-11-02 21-59-37](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/ab5848b5-a446-4953-bfba-b71b52c2c983)
-![Screenshot from 2023-11-02 22-00-07](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/b2dfdbcc-982b-4e8f-9f52-82739a3657c6)
+![Screenshot from 2023-11-06 10-57-08](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/77120591-5ce3-4e5e-be9e-7ecbd4c8a09e)
+
 
