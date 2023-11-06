@@ -377,4 +377,11 @@ The resulting simulation is then visualized using GTKWave, which allows you to v
 
 ![Screenshot from 2023-11-06 10-57-08](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/77120591-5ce3-4e5e-be9e-7ecbd4c8a09e)
 
+# wrapper module after netlist created
+```bash
+show wrapper
+```
+
+![Screenshot from 2023-11-06 11-49-38](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/83e5c3f6-2db5-452c-a54a-3cb35e4eda9f)
+
 
