@@ -62,96 +62,90 @@ gcc locker.c
 ## C Code
 
 ```C
+// Function to monitor water level and control the buzzer
 //#include<stdio.h>
+int main()  {
 
-int main()
-{
-int i,j;
-int touchsensor_value,Result1,mask;
-int touchsensor,buzzer;
-
-
-
-//for (int j=0; j<15;j++) 
-
-while (1)
-{
-
-/*if(j%3==1)
-			touchsensor_value = 1;
+    int touchsensor_value;
+    int buzzer;
+    int mask;
+    int i;
+    int touchsensor;
+    int test,test1;
+    
+    
+        //for (int j=0; j<15;j++) {
+       while(1){
+       /* 
+	
+       if(j<10)
+			touchsensor_value=1;
 	else
-			touchsensor_value =0;
-*/			
+			touchsensor_value=0;
+	*/		
 
-
-			
-//  asm code to read sensor value
-
-	asm volatile(
+		asm volatile(
+		
 		"andi %0, x30, 0x01\n\t"
 		: "=r" (touchsensor_value)
-		:
 		: 
+		:
 		);
-
-
-
-//if condition logic
-if (touchsensor_value)
-	{
-	mask=0xFFFFFFFD;
 	
-	// printf(" \n");
-	
-	buzzer=1;
-	
-	asm volatile(    
-            "ori x30, x30,2"               
+
+ 
+       
+        if (touchsensor_value == 1) {
+            // If moisture is below the threshold, set the buzzer control register to 1 (buzzer on)
+            mask=0xFFFFFFFD;
+          //  printf("water \n");
+          buzzer = 1; 
+       
+            asm volatile(
+            "and x30,x30, %0\n\t"     // Load immediate 1 into x30
+            "ori x30, x30,2"                 // output at 2nd bit , that switches on the buzzer
             :
-            :
+            :"r"(mask)
             :"x30"
             );
-            
             asm volatile(
 	    	"addi %0, x30, 0\n\t"
-	    	:"=r"(Result1)
+	    	:"=r"(test)
 	    	:
 	    	:"x30"
 	    	);
-    	//printf("Result1 = %d\n",Result1);
-    	
-	
-
-	}
-else
-	{
-	
-	mask=0xFFFFFFFD;
-	
-	buzzer=0;
-	
-	
-	asm volatile( 
-            "and x30,x30, %0\n\t"     
-            "ori x30, x30,0"            
+    	//printf("Test = %d\n",test);
+            
+      
+        } 
+        else {
+            // If moisture is above the threshold, set the buzzer control register to 0 (buzzer off)
+            mask=0xFFFFFFFD;
+             buzzer = 0; 
+          //  printf("no watre \n ");
+            asm volatile( 
+            "and x30,x30, %0\n\t"     // Load immediate 1 into x30
+            "ori x30, x30,0"            //// output at 2nd bit , that switches off the buzzer
             :
             :"r"(mask)
             :"x30"
         );
         asm volatile(
 	    	"addi %0, x30, 0\n\t"
-	    	:"=r"(Result1)
+	    	:"=r"(test1)
 	    	:
 	    	:"x30"
 	    	);
-	 //printf("Result1 = %d\n",Result1);
+	//printf("Test = %d\n",test1);
+        }
 
-	}
-	//printf("buzzer=%d \n", touchsensor_value); 
+  //printf("buzzer=%d \n", buzzer);   
 }
+
 
 return 0;
 }
+
 ```
 
 ## Assembly Code
@@ -163,30 +157,33 @@ out:     file format elf32-littleriscv
 Disassembly of section .text:
 
 00010054 <main>:
-   10054:	fe010113          	addi	sp,sp,-32
-   10058:	00812e23          	sw	s0,28(sp)
-   1005c:	02010413          	addi	s0,sp,32
+   10054:	fd010113          	addi	sp,sp,-48
+   10058:	02812623          	sw	s0,44(sp)
+   1005c:	03010413          	addi	s0,sp,48
    10060:	001f7793          	andi	a5,t5,1
    10064:	fef42623          	sw	a5,-20(s0)
-   10068:	fec42783          	lw	a5,-20(s0)
-   1006c:	02078263          	beqz	a5,10090 <main+0x3c>
-   10070:	ffd00793          	li	a5,-3
-   10074:	fef42423          	sw	a5,-24(s0)
-   10078:	00100793          	li	a5,1
-   1007c:	fef42223          	sw	a5,-28(s0)
-   10080:	002f6f13          	ori	t5,t5,2
-   10084:	000f0793          	mv	a5,t5
-   10088:	fef42023          	sw	a5,-32(s0)
-   1008c:	fd5ff06f          	j	10060 <main+0xc>
-   10090:	ffd00793          	li	a5,-3
-   10094:	fef42423          	sw	a5,-24(s0)
-   10098:	fe042223          	sw	zero,-28(s0)
-   1009c:	fe842783          	lw	a5,-24(s0)
-   100a0:	00ff7f33          	and	t5,t5,a5
-   100a4:	000f6f13          	ori	t5,t5,0
-   100a8:	000f0793          	mv	a5,t5
-   100ac:	fef42023          	sw	a5,-32(s0)
-   100b0:	fb1ff06f          	j	10060 <main+0xc>
+   10068:	fec42703          	lw	a4,-20(s0)
+   1006c:	00100793          	li	a5,1
+   10070:	02f71663          	bne	a4,a5,1009c <main+0x48>
+   10074:	ffd00793          	li	a5,-3
+   10078:	fef42423          	sw	a5,-24(s0)
+   1007c:	00100793          	li	a5,1
+   10080:	fef42223          	sw	a5,-28(s0)
+   10084:	fe842783          	lw	a5,-24(s0)
+   10088:	00ff7f33          	and	t5,t5,a5
+   1008c:	002f6f13          	ori	t5,t5,2
+   10090:	000f0793          	mv	a5,t5
+   10094:	fef42023          	sw	a5,-32(s0)
+   10098:	fc9ff06f          	j	10060 <main+0xc>
+   1009c:	ffd00793          	li	a5,-3
+   100a0:	fef42423          	sw	a5,-24(s0)
+   100a4:	fe042223          	sw	zero,-28(s0)
+   100a8:	fe842783          	lw	a5,-24(s0)
+   100ac:	00ff7f33          	and	t5,t5,a5
+   100b0:	000f6f13          	ori	t5,t5,0
+   100b4:	000f0793          	mv	a5,t5
+   100b8:	fcf42e23          	sw	a5,-36(s0)
+   100bc:	fa5ff06f          	j	10060 <main+0xc>
 ```
 
 ## RISCV Instruction in Assembly Code
@@ -194,16 +191,16 @@ Disassembly of section .text:
 ```
 Number of different instructions: 10
 List of unique instructions:
-j
-andi
-addi
 sw
-beqz
-ori
 and
 lw
-mv
+andi
+addi
 li
+mv
+bne
+ori
+j
 ```
 ## Spike Code:
 
