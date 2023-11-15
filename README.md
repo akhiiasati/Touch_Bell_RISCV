@@ -608,8 +608,21 @@ View the post-routing design in Magic:
 ![Screenshot from 2023-11-16 01-57-19](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/8475ba77-ac4f-448f-abd4-694bf9e854ec)
 
 
-Here DRC violation is zero:
+DRC violation is zero:
 ![Screenshot from 2023-11-16 02-01-48](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/6654f7e2-edfd-455a-aac3-2ba5872ca7ee)
+
+Given a Clock period of 70ns in Json file , setup slack we got after routing is 19.13ns
+
+                              1
+Max Performance =  ------------------------
+                     clock period - slack(setup)
+
+Max Performance = 0.0196 Ghz
+
+## Some Extra Steps:
+
+![Screenshot from 2023-11-14 15-53-31](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/122ed158-798b-4eb3-814e-917c271fef64)
+
 
 # Word of Thanks
 I sciencerly thank Mr. Kunal Gosh(Founder/VSD) for helping me out to complete this flow smoothly.
