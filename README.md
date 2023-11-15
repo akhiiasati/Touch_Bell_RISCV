@@ -576,3 +576,34 @@ To execute the routing process, use the following command:
 This command initiates both the Global Routing and Detailed Routing stages, resulting in a well-defined interconnect system that adheres to design rules and minimizes design rule check (DRC) errors. Proper routing is essential for ensuring signal integrity and meeting performance requirements in the final chip design.
 
 ![Screenshot from 2023-11-16 01-41-08](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/25dbec4b-f530-4750-8f1e-676023800b14)
+
+
+
+View the post-routing design in Magic:
+
+```bash
+% magic -T /home/akhilasati/vsdstdcelldesign/libs/sky130A.tech lef read /home/OpenLane/designs/touch_sensor/runs/RUN_2023.11.14_08.46.33/tmp merged.nom.lef def read wrapper.def &
+
+```
+
+![Screenshot from 2023-11-16 01-51-58](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/c0f30791-159a-4d6d-93b8-c7e785ef0705)
+
+
+#### post_routing Timing Reports
+
+![Screenshot from 2023-11-16 01-56-31](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/46e10986-80ef-4424-8e0b-9cda7c3d9e97)
+
+
+#### post_routing Area Reports
+
+![Screenshot from 2023-11-16 01-53-21](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/16635e3b-4798-4593-8803-f355ea689f18)
+
+#### post_routing Power Reports
+
+![Screenshot from 2023-11-16 01-57-19](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/8475ba77-ac4f-448f-abd4-694bf9e854ec)
+
+
+Here DRC violation is zero:
+![Screenshot from 2023-11-16 02-01-48](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/6654f7e2-edfd-455a-aac3-2ba5872ca7ee)
+
+
