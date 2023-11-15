@@ -509,6 +509,10 @@ magic -T /home/akhilasati/vsdstdcelldesign/libs/sky130A.tech lef read /home/Open
 
 ![Screenshot from 2023-11-16 00-57-02](https://github.com/akhiiasati/IIITB_Advanced_Physical_Design_using_OpenLANE_Sky130/assets/43675821/29a262a9-d3f6-4be5-bda1-38e65f6888fe)
 
+
+![WhatsApp Image 2023-11-16 at 02 31 43_05327e13](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/133416c4-aee6-4494-a31e-1bb281e4810f)
+
+
 ## Clock Tree Synthesis (CTS) Overview:
 
 Clock Tree Synthesis is a critical step in the ASIC design flow aimed at creating an efficient clock distribution network for delivering the clock signal to all sequential elements. The primary objective is to minimize clock skew across the entire chip, ensuring synchronous operation of the design. H-trees are commonly employed as a network topology to achieve this goal.
@@ -577,6 +581,7 @@ This command initiates both the Global Routing and Detailed Routing stages, resu
 
 ![Screenshot from 2023-11-16 01-41-08](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/25dbec4b-f530-4750-8f1e-676023800b14)
 
+![WhatsApp Image 2023-11-16 at 02 31 43_a72b96b9](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/3bd17745-d375-4c22-ba3c-4b16a99bbec8)
 
 
 View the post-routing design in Magic:
@@ -606,4 +611,17 @@ View the post-routing design in Magic:
 Here DRC violation is zero:
 ![Screenshot from 2023-11-16 02-01-48](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/6654f7e2-edfd-455a-aac3-2ba5872ca7ee)
 
+# Word of Thanks
+I sciencerly thank Mr. Kunal Gosh(Founder/VSD) for helping me out to complete this flow smoothly.
+
+# Acknowledgement
+- Kunal Ghosh, VSD Corp. Pvt. Ltd.
+- Skywater Foundry
+- Mayank Kabra,Founder,Chipcron Pvt.Ltd.
+
+# Reference
+- https://github.com/The-OpenROAD-Project/OpenSTA.git
+- https://github.com/kunalg123
+- https://www.vsdiat.com
+- https://github.com/SakethGajawada/RISCV-GNU
 
