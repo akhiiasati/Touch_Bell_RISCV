@@ -509,4 +509,70 @@ magic -T /home/akhilasati/vsdstdcelldesign/libs/sky130A.tech lef read /home/Open
 
 ![Screenshot from 2023-11-16 00-57-02](https://github.com/akhiiasati/IIITB_Advanced_Physical_Design_using_OpenLANE_Sky130/assets/43675821/29a262a9-d3f6-4be5-bda1-38e65f6888fe)
 
+## Clock Tree Synthesis (CTS) Overview:
 
+Clock Tree Synthesis is a critical step in the ASIC design flow aimed at creating an efficient clock distribution network for delivering the clock signal to all sequential elements. The primary objective is to minimize clock skew across the entire chip, ensuring synchronous operation of the design. H-trees are commonly employed as a network topology to achieve this goal.
+
+### Key Objectives:
+
+- Clock Distribution: Ensures the clock signal reaches every sequential element in the design.
+- Clock Skew Minimization: Aims to achieve zero clock skew across the chip.
+- H-tree Topology: Common methodology in CTS, providing an effective structure for distributing the clock signal evenly.
+
+#### Command to Run CTS:
+To perform Clock Tree Synthesis, execute the following command:
+
+```bash
+run_cts
+```
+
+This command triggers the CTS process, where the tool generates an optimized clock tree structure based on the design requirements and constraints. Achieving a balanced clock distribution is crucial for maintaining synchronization and meeting performance criteria in subsequent stages of the ASIC design flow.
+
+![Screenshot from 2023-11-16 01-04-38](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/8f90dab2-1f53-47f1-8974-f546983bc747)
+
+### Timing Reports
+
+![Screenshot from 2023-11-16 01-32-14](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/72960463-2357-4155-a206-28e7991503dc)
+
+
+### AREA Reports
+
+![Screenshot from 2023-11-16 01-32-32](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/21c8d751-ba10-4ebf-86a1-b8ecdf2e7c80)
+
+
+### Skew Reports
+
+![Screenshot from 2023-11-16 01-33-04](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/6b0c12ec-a203-4af0-9a58-8d61eb06d841)
+
+
+### Power Reports
+
+![Screenshot from 2023-11-16 01-33-17](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/ef016302-b176-488b-bc7c-51cbed1fff13)
+
+# Routing:
+
+Routing in the OpenLANE ASIC flow involves implementing the interconnect system between standard cells using the remaining available metal layers post Clock Tree Synthesis (CTS) and Power Distribution Network (PDN) generation. TritonRoute is the tool used for routing in OpenLANE, and the process is divided into two stages: Global Routing and Detailed Routing.
+
+### Global Routing:
+`Routing Grids:` The routing region is divided into rectangular grids, represented as coarse 3D routes using the Fastroute tool.
+`Objective:` Establishes a high-level routing plan across the chip.
+`Result:` Provides a global routing framework to guide the subsequent detailed routing stage.
+
+### Detailed Routing:
+`Routing Grids and Guides:` Utilizes finer grids and routing guides to implement the physical wiring, employing the TritonRoute tool.
+`Features of TritonRoute:`
+- Honors pre-processed route guides.
+- Assumes that each net satisfies inter-guide connectivity.'
+- Utilizes a Mixed-Integer Linear Programming (MILP) based panel routing scheme.
+- Implements an intra-layer parallel and inter-layer sequential routing framework.
+
+### Running the Routing Process:
+To execute the routing process, use the following command:
+
+```bash
+% run_routing
+```
+
+This command initiates both the Global Routing and Detailed Routing stages, resulting in a well-defined interconnect system that adheres to design rules and minimizes design rule check (DRC) errors. Proper routing is essential for ensuring signal integrity and meeting performance requirements in the final chip design.
+
+![Screenshot from 2023-11-16 01-41-08](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/25dbec4b-f530-4750-8f1e-676023800b14)
