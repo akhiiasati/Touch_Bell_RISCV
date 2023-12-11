@@ -612,12 +612,13 @@ DRC violation is zero:
 ![Screenshot from 2023-11-16 02-01-48](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/6654f7e2-edfd-455a-aac3-2ba5872ca7ee)
 
 Given a Clock period of 70ns in Json file , setup slack we got after routing is 19.13ns
-
+```
                               1
 Max Performance =  ------------------------
                      clock period - slack(setup)
 
 Max Performance = 0.0196 Ghz
+```
 
 ## Some Extra Steps:
 
